@@ -16,7 +16,7 @@ ROWS = SCREEN_SIZE[1] / CELL_SIZE
 # Set up the colors
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
-RED = (255, 0, 0)
+RED   = (255, 0, 0)
 
 # Setup directions
 LEFT  = (-1, 0)
@@ -119,9 +119,8 @@ def main():
     food = Food(COLS, ROWS, CELL_SIZE, RED)
     food.set_random_location()
     score = 0
-    game_over = False
 
-    while not game_over:
+    while True:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -129,25 +128,30 @@ def main():
 
             if event.type == KEYDOWN:
                 if event.key == K_LEFT and snake.direction != RIGHT:
-                    snake.direction = LEFT 
+                    snake.direction = LEFT
+                    print("LEFT") 
                 elif event.key == K_RIGHT and snake.direction != LEFT:
                     snake.direction = RIGHT
+                    print("RIGHT") 
                 elif event.key == K_UP and snake.direction != DOWN:
                     snake.direction = UP
+                    print("UP") 
                 elif event.key == K_DOWN and snake.direction != UP:
                     snake.direction = DOWN
+                    print("DOWN") 
 
         screen.fill(BLACK)
+        snake.update()
         # Check if the Snake has hit itself or the edge 
         if snake.check_collisions():
-            game_over = True
+            break;
         # Check if the Snake has eaten the Food
         if snake.collide(food):
             snake.add_segment()
             food.set_random_location()
             score += 1
         
-        snake.update()
+        
         food.render(screen)
         snake.render(screen)
         pygame.display.update()
