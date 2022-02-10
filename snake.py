@@ -12,7 +12,6 @@ CELL_SIZE = 20
 COLS = SCREEN_SIZE[0] / CELL_SIZE
 ROWS = SCREEN_SIZE[1] / CELL_SIZE
 
-
 # Set up the colors
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
@@ -60,7 +59,7 @@ class Snake:
         # Check if the Snake has hit itself 
         head = self.segments[0]
         for segment in self.segments[1:]:
-            if head[0] == segment[0] and  head[1] == segment[1]:
+            if head[0] == segment[0] and head[1] == segment[1]:
                 return True
         return False
     
@@ -129,16 +128,12 @@ def main():
             if event.type == KEYDOWN:
                 if event.key == K_LEFT and snake.direction != RIGHT:
                     snake.direction = LEFT
-                    print("LEFT") 
                 elif event.key == K_RIGHT and snake.direction != LEFT:
                     snake.direction = RIGHT
-                    print("RIGHT") 
                 elif event.key == K_UP and snake.direction != DOWN:
                     snake.direction = UP
-                    print("UP") 
                 elif event.key == K_DOWN and snake.direction != UP:
                     snake.direction = DOWN
-                    print("DOWN") 
 
         screen.fill(BLACK)
         snake.update()
